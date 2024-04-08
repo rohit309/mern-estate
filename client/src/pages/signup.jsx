@@ -1,12 +1,12 @@
 import {useState} from 'react'
-import {Link, useNavigate } from 'react-router-dom'
+import {Link, useNavigate } from 'react-router-dom'  //to redirect to signin link
 import signin from './signin';
 
 export default function signUp() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate();  // to navigate ton sign in link
   const handleChange = (e) => {
     setFormData(
       {
@@ -14,8 +14,8 @@ export default function signUp() {
         [e.target.id]:e.target.value,
       });
     };
-  const handleSubmit = async(e) => {
-    e.preventDefault();
+  const handleSubmit = async(e) => {    // since we are using await therefor async
+    e.preventDefault();  //to prevent refresh while submit
     try {
       setLoading(true);
       const res = await fetch('/api/auth/signup',
@@ -55,11 +55,10 @@ export default function signUp() {
         <input type="email" placeholder='email' className='border p-3 rounded-lg' id="email" onChange={handleChange} />
         <input 
           type="password" 
-          placeholder='passsword' 
+          placeholder='passsword'
           className='border p-3 rounded-lg' 
           id="password" 
-          onChange={handleChange} 
-        />
+          onChange={handleChange} />
         
         <button disabled={loading} className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80' > 
           {loading ? 'Loading...': 'Sign Up'}
